@@ -1,0 +1,16 @@
+export const PATHS = {
+    ROOT: '/',
+    HOME: '/home',
+    LOGIN: '/login',
+    REGISTER: '/register',
+    SETTINGS: '/settings',
+    IMPOSSIBLE_TRIVIA: '/impossible-trivia',
+    PHONE_TOPICS: '/phone-topics',
+    TODAY_HISTORY: '/today-history',
+    TODAY_BIRTHDAYS: '/today-birthdays',
+    TIMELINE_VIEW: '/timeline-view',
+    CREATE_ADVERT: '/create-advert',
+    STATION_IDS: '/station-ids',
+    EVENTS: '/events',
+    NEWS: '/news',
+};

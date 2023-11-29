@@ -1,0 +1,28 @@
+/* 
+.dashboard-layout {
+  display: flex;
+  height: 100vh;
+}
+
+.main-content {
+  flex: 1;
+  padding: 20px;
+} */
+
+.dashboard-layout {
+  display: flex;
+  height: 100vh;
+  background-color: darkgray;
+}
+
+.main-content {
+  flex: 1;
+  padding: 20px;
+}
+
+/* Mobile Styles */
+@media (max-width: 768px) {
+  .dashboard-layout {
+    flex-direction: column;
+  }
+}

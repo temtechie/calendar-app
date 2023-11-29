@@ -1,0 +1,40 @@
+/* .top-nav {
+  background-color: #eee;
+  padding: 10px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+  position: relative;
+}
+
+.hamburger-icon {
+  background: none;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+} */
+
+.top-nav {
+  background-color: #eee;
+  padding: 10px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+  position: relative;
+}
+
+.hamburger-icon {
+  background: none;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+/* Mobile Styles */
+@media (max-width: 768px) {
+  .top-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .hamburger-icon {
+    order: 1;
+  }
+}

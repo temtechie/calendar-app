@@ -1,4 +1,4 @@
-export default function Root() {
+export default function CalendarView() {
   return (
     <>
       <div id='sidebar'>
@@ -32,5 +32,5 @@ export default function Root() {
       </div>
       <div id='detail'></div>
     </>
-  )
+  );
 }

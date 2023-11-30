@@ -2,11 +2,9 @@ import { Outlet } from 'react-router-dom';
 import Login from '../pages/login';
 
 function ProtectedRoute() {
-  const auth = {
-    id: '',
-  };
+  const token = localStorage.getItem('token');
 
-  return auth?.id ? <Outlet /> : <Login />;
+  return token ? <Outlet /> : <Login />;
 }
 
 export default ProtectedRoute;

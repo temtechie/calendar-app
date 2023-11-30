@@ -7,5 +7,5 @@ export const PATHS = {
     EVENT_LIST: '/event-list',
     EVENT_DETAILS: '/event-details',
     EVENT_VIEW: '/event-view',
-    EVENTS: '/events',
+    EVENT: '/event',
 };

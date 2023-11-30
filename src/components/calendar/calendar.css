@@ -1,0 +1,30 @@
+.calendar-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 0.5rem;
+  background-color: #3174ad;
+  margin: 0.5rem 0;
+  color: #fff;
+  font-size: 18px;
+}
+
+.rbc-today {
+  background-color: #38a3d1;
+  color: aliceblue;
+}
+.rbc-today:hover {
+  background-color: #70bee0;
+  color: aliceblue;
+}
+.calendar-top-btn {
+  padding: 8px;
+  background-color: #fff;
+  color: black;
+  border: none;
+  border-radius: 8px;
+  font-size: 18px;
+}
+.calendar-top-btn:hover {
+  background-color: rgb(232, 231, 231);
+}

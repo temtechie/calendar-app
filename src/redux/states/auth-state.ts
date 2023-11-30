@@ -1,20 +1,10 @@
-export const countState = {
-    value: 2,
-}
+import { IAuthState } from "../../interfaces/auth.interface";
 
-export const authState = {
+
+export const authState: IAuthState = {
     token: '',
-    userDetail: null,
+    user: null,
     loading: false,
     message: '',
     error: null
 }
-
-export const staffState = {
-    staffList: [],
-    success: false,
-    error: false,
-    loading: false,
-    message: null
-}
-

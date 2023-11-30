@@ -1,10 +1,11 @@
 import { configureStore } from '@reduxjs/toolkit'
+import authSlicer from './features/auth-slice'
+import eventSlice from './features/event-slice'
 // ...
 export const store = configureStore({
     reducer: {
-        // posts: postsReducer,
-        // comments: commentsReducer,
-        // users: usersReducer,
+        auth: authSlicer,
+        events: eventSlice,
     },
 })
 

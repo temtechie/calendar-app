@@ -1,4 +1,3 @@
-import 'react-calendar/dist/Calendar.css';
 import CustomRoutes from './routes';
 
 function App() {

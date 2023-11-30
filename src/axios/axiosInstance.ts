@@ -1,10 +1,7 @@
 import axios from 'axios';
 const axiosInstance = axios.create({
-    // baseURL: process.env.NODE_ENV === "development" ? 'http://flavetechs.com/smp/development/' : "http://flavetechs.com/smp/staging/",
-    //    baseURL: 'https://localhost:44373/',
-    // baseURL: 'http://flavetechs.com/smp/development/',
-    // baseURL: 'http://flavetechs.com/smp/staging/',
-    baseURL: 'http://flavetechs.com/all/client/',
+    baseURL: 'https://calendarapp-api-c0co.onrender.com',
+    // baseURL: 'http://localhost:3000',
     headers: {
         Authorization: '',
     },
@@ -40,9 +37,10 @@ axiosInstance.interceptors.response.use(async (response: any) => response, (erro
 
 axiosInstance.interceptors.request.use(
     async (config: any) => {
-        const sessionToken = await localStorage.getItem('token');
+        const sessionToken = localStorage.getItem('token');
         if (sessionToken) {
-            config.headers.Authorization = 'Bearer ' + sessionToken
+            const cleanedToken = sessionToken.replace(/^"(.*)"$/, '$1');
+            config.headers.Authorization = `Bearer ${cleanedToken}`
             return config;
         }
         return config;

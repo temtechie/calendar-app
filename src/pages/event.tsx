@@ -1,16 +1,27 @@
-// EventPage.js
-
-import React from 'react';
+import { useState } from 'react';
+import DatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css';
 
 const EventPage = () => {
+  const [selectedDateTime, setSelectedDateTime] = useState('');
+
+  const handleDateChange = (date: any) => {
+    setSelectedDateTime(date);
+  };
+
+  console.log('selectedDateTime', selectedDateTime);
+
   return (
-    <div className='event-page'>
-      <h2>Event Page</h2>
-      <p>
-        Welcome to the Event Page. Here, you can view and manage upcoming
-        events.
-      </p>
-      {/* Add your event-related content and components here */}
+    <div>
+      <DatePicker
+        // selected={selectedDateTime}
+        onChange={handleDateChange}
+        showTimeSelect
+        dateFormat='MMMM d, yyyy h:mm aa'
+      />
+      {selectedDateTime && (
+        <p>Selected Date and Time: {selectedDateTime?.toString()}</p>
+      )}
     </div>
   );
 };

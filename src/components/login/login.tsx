@@ -1,8 +1,35 @@
 import { Link } from 'react-router-dom';
 import { PATHS } from '../../routes/constants';
 import { HiArrowSmallLeft } from 'react-icons/hi2';
+import { useState } from 'react';
+import { useAppDispatch } from '../../redux/hook';
+import { loginUser } from '../../redux/actions/auth-action';
 
 const LoginComponent = () => {
+  const dispatch = useAppDispatch();
+
+  const [user, setUser] = useState({ email: '', password: '' });
+
+  const handleLogin = (e: any) => {
+    const { name, value } = e.target;
+    setUser({ ...user, [name]: value });
+  };
+
+  const handleFormSubmit = (e: any) => {
+    e.preventDefault();
+
+    dispatch(loginUser(user))
+      .then((resultAction) => {
+        const originalPromiseResult = resultAction.payload;
+        if (originalPromiseResult) {
+          window.location.href = '/home';
+        }
+      })
+      .catch((error) => {
+        console.log('Error:', error);
+      });
+  };
+
   return (
     <div>
       <div className='login-content'>
@@ -24,6 +51,7 @@ const LoginComponent = () => {
               required
               className='input-field'
               placeholder='Email address'
+              onChange={handleLogin}
             />
           </div>
           <div className='form-group'>
@@ -36,19 +64,8 @@ const LoginComponent = () => {
               required
               className='input-field'
               placeholder='Password'
+              onChange={handleLogin}
             />
-          </div>
-
-          <div className='form-checkbox'>
-            <input
-              id='remember-me'
-              name='remember-me'
-              type='checkbox'
-              className='checkbox-input'
-            />
-            <label htmlFor='remember-me' className='checkbox-label'>
-              Remember me
-            </label>
           </div>
 
           <div className='form-links'>
@@ -56,9 +73,12 @@ const LoginComponent = () => {
               Forgot your password?
             </a>
           </div>
-
           <div className='form-button'>
-            <button type='submit' className='submit-button'>
+            <button
+              type='submit'
+              className='submit-button'
+              onClick={handleFormSubmit}
+            >
               Sign in
             </button>
           </div>

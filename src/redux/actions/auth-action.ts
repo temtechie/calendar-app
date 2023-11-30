@@ -1,21 +1,36 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import axiosInstance from '../../axios/axiosInstance';
-import { authActionTypes } from '../action-types/auth-action-type';
 
-export const loginUser = createAsyncThunk(
-    authActionTypes.userLogin,
-    async (user) => {
-        const response = await axiosInstance.post('/api/v1/auth/login', user)
-        return response.data
+interface UserData {
+    email: string;
+    password: string;
+}
+
+
+export const registerUser = createAsyncThunk(
+    'user/register',
+    async (userData, { rejectWithValue }) => {
+        try {
+            const response = await axiosInstance.post('/user/register', userData);
+            return response.data;
+        } catch (error) {
+            console.log("registerUser error:", error);
+            return rejectWithValue(error);
+        }
     }
 );
-
-export const createUser = createAsyncThunk(
-    authActionTypes.userSignup,
-    async (newUser) => {
-        const response = await axiosInstance.post('/api/v1/auth/signup', newUser)
-        return response.data
-    })
+export const loginUser = createAsyncThunk<any, UserData>(
+    'user/login',
+    async (userData, { rejectWithValue }) => {
+        try {
+            const response = await axiosInstance.post('/user/login', userData);
+            return response.data;
+        } catch (error) {
+            console.log("loginUser error:", error);
+            return rejectWithValue(error);
+        }
+    }
+);
 
 
 

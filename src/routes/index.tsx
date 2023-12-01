@@ -5,6 +5,8 @@ import Loading from '../components/common/loading/loading';
 import ProtectedRoute from './protected-route';
 import UnprotectedRoute from './unprotected-route';
 import DashboardLayout from '../layout/default-layout';
+import DayView from '../pages/day-view';
+import EditModal from '../pages/calendar-edit';
 
 const LandingPage = lazy(() => import('../pages/landing-page'));
 const Login = lazy(() => import('../pages/login'));
@@ -59,7 +61,8 @@ const router = createBrowserRouter([
         ),
         children: [
           { path: PATHS.HOME, element: <CalendarView /> },
-          { path: PATHS.EVENT, element: <EventPage /> },
+          { path: PATHS.EDIT_CALENDAR, element: <EditModal /> },
+          { path: PATHS.CALENDAR, element: <DayView /> },
         ],
       },
     ],

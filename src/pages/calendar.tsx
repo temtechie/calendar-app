@@ -6,10 +6,11 @@ import { useEffect, useState } from 'react';
 import Modal from '../components/modal/modal';
 import { useAppDispatch, useAppSelector } from '../redux/hook';
 import { getAllEvents } from '../redux/actions/event-action';
+import Loading from '../components/common/loading/loading';
 
 export default function CalendarView() {
-  const { list } = useAppSelector((state) => state.events);
-  const eventList = list ?? [];
+  const { list, loading } = useAppSelector((state) => state.events);
+  // const eventList = list ?? [];
   const dispatch = useAppDispatch();
 
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -32,12 +33,15 @@ export default function CalendarView() {
     dispatch(getAllEvents());
   }, []);
 
-  const eventsForCalendar = eventList?.map((event) => ({
-    title: event?.title,
-    start: event?.start,
-    end: event?.end,
-    resource: event?.description,
-  }));
+  const eventsForCalendar = list
+    ? list.map((event) => ({
+        title: event?.title,
+        start: new Date(event?.start),
+        end: new Date(event?.end),
+      }))
+    : [];
+
+  if (loading) return <Loading />;
 
   return (
     <div>

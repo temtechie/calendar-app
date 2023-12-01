@@ -6,9 +6,9 @@ function NavbarButton() {
       <Link to='/login' className='navbar__login-btn'>
         Login
       </Link>
-      <Link to='/register' className='navbar__register-btn'>
+      {/* <Link to='/register' className='navbar__register-btn'>
         Register
-      </Link>
+      </Link> */}
     </div>
   );
 }

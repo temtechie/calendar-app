@@ -5,7 +5,8 @@ export const PATHS = {
     REGISTER: '/register',
     CALENDAR: '/calendar',
     EVENT_LIST: '/event-list',
-    EVENT_DETAILS: '/event-details',
+    DAY_VIEW: '/day-view',
     EVENT_VIEW: '/event-view',
     EVENT: '/event',
+    EDIT_CALENDAR: '/edit-calendar',
 };

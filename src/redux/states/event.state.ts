@@ -5,6 +5,7 @@ export const eventState: IEvent = {
     title: '',
     date: '',
     time: '',
+    eventData: null,
     description: '',
     loading: false,
     error: null,

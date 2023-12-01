@@ -5,13 +5,7 @@ import Loading from '../components/common/loading/loading';
 import { useAppSelector } from '../redux/hook';
 
 function UnprotectedRoute() {
-  const { token, user, error } = useAppSelector((state) => state.auth);
-
-  console.log('state', token, user, error);
-
-  const auth = {
-    id: '',
-  };
+  const { token } = useAppSelector((state) => state.auth);
 
   return token ? (
     <Navigate to={PATHS.HOME} />

@@ -4,6 +4,7 @@ export interface IEvent {
     title: string;
     date: string;
     time: string;
+    eventData?: any;
     description?: string;
     loading?: boolean,
     error?: any,

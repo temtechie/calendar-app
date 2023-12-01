@@ -9,12 +9,9 @@ const EventPage = () => {
     setSelectedDateTime(date);
   };
 
-  console.log('selectedDateTime', selectedDateTime);
-
   return (
     <div>
       <DatePicker
-        // selected={selectedDateTime}
         onChange={handleDateChange}
         showTimeSelect
         dateFormat='MMMM d, yyyy h:mm aa'

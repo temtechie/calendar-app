@@ -1,12 +1,25 @@
-import { useState } from 'react';
-import './Modal.css';
-import DateTimePicker from '../common/datetime-picker';
-import { createEvent, getAllEvents } from '../../redux/actions/event-action';
-import { useAppDispatch } from '../../redux/hook';
+import { useEffect, useState } from 'react';
+import { useAppDispatch, useAppSelector } from '../redux/hook';
+import { fetchSingleEvent, updateEvent } from '../redux/actions/event-action';
+import DateTimePicker from '../components/common/datetime-picker';
+import { useNavigate, useSearchParams } from 'react-router-dom';
+import '../components/calendar/calendar.css';
 
-const Modal = ({ isOpen, onClose, mode, eventData }: any) => {
+const EditModal = () => {
+  const [searchParams] = useSearchParams();
+  const eventIdParam = searchParams.get('eventId');
+
   const dispatch = useAppDispatch();
-  const [title, setTitle] = useState(eventData ? eventData.title : '');
+  const navigate = useNavigate();
+  useEffect(() => {
+    if (eventIdParam) {
+      dispatch(fetchSingleEvent(eventIdParam));
+    }
+  }, [dispatch, eventIdParam]);
+
+  const { eventData } = useAppSelector((state) => state.events);
+
+  const [title, setTitle] = useState(eventData?.title || '');
   const [start, setStart] = useState(
     eventData ? new Date(eventData.start) : null,
   );
@@ -14,36 +27,42 @@ const Modal = ({ isOpen, onClose, mode, eventData }: any) => {
   const [description, setDescription] = useState(
     eventData ? eventData.description : '',
   );
-  const handleSave = async () => {
-    dispatch(createEvent({ title, start, end, description }));
-    // await dispatch(getAllEvents());
-    onClose();
+
+  useEffect(() => {
+    if (eventData) {
+      setTitle(eventData.title || '');
+      setStart(new Date(eventData.start) || null);
+      setEnd(new Date(eventData.end) || null);
+      setDescription(eventData.description || '');
+    }
+  }, [eventData]);
+
+  const handleSave = () => {
+    dispatch(
+      updateEvent({
+        eventId: eventIdParam,
+        eventData: { title, start, end, description },
+      }),
+    );
     setTitle('');
     setStart(null);
     setEnd(null);
     setDescription('');
-    dispatch(getAllEvents);
+    navigate('/home');
+    // dispatch(getAllEvents);
   };
 
-  console.log('start, end,', start, end);
-
   return (
-    <div className={`modal ${isOpen ? 'open' : ''}`}>
+    <div className={``}>
       <div className='modal-content'>
         <div className='modal-header'>
-          <h2>
-            {mode === 'create'
-              ? 'Create Event'
-              : mode === 'edit'
-                ? 'Edit Event'
-                : 'Delete Event'}
-          </h2>
+          <h2>Edit Event</h2>
           <span
             className='close'
-            onClick={onClose}
+            onClick={() => navigate('/home')}
             style={{ cursor: 'pointer' }}
           >
-            &times;
+            Go Back
           </span>
         </div>
         <div className='modal-body'>
@@ -70,11 +89,11 @@ const Modal = ({ isOpen, onClose, mode, eventData }: any) => {
         </div>
         <div className='modal-footer'>
           <button onClick={handleSave}>Save</button>
-          <button onClick={onClose}>Cancel</button>
+          {/* <button onClick={onClose}>Cancel</button> */}
         </div>
       </div>
     </div>
   );
 };
 
-export default Modal;
+export default EditModal;

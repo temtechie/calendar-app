@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { createEvent, getAllEvents } from '../actions/event-action';
+import { createEvent, fetchEventsByStartDay, fetchSingleEvent, getAllEvents } from '../actions/event-action';
 import { eventState } from '../states';
 
 const eventSlice = createSlice({
@@ -21,9 +21,6 @@ const eventSlice = createSlice({
             .addCase(getAllEvents.fulfilled, (state, action) => {
                 state.loading = false;
                 state.list = action.payload;
-                console.log("state.list = action.payload;", action.payload);
-
-                state.message = action.payload.message;
             })
             .addCase(getAllEvents.rejected, (state, action) => {
                 state.loading = false;
@@ -36,16 +33,44 @@ const eventSlice = createSlice({
                 state.message = '';
             })
             .addCase(createEvent.fulfilled, (state, action) => {
-                console.log("state.list = action.payload;", action.payload);
                 state.loading = false;
-                // state.list = action.payload;
-
-                state.message = action.payload.message;
+                state.message = action?.payload?.data.message;
             })
             .addCase(createEvent.rejected, (state, action) => {
                 state.loading = false;
-                console.log("rejected action", action);
-                console.log("rejected action", action.payload);
+                console.log("rejected action", action?.payload);
+            })
+
+
+            .addCase(fetchEventsByStartDay.pending, (state) => {
+                state.loading = true;
+                state.error = null;
+                state.message = '';
+            })
+            .addCase(fetchEventsByStartDay.fulfilled, (state, action) => {
+                state.loading = false;
+                state.list = action.payload;
+            })
+            .addCase(fetchEventsByStartDay.rejected, (state, action) => {
+                state.loading = false;
+                console.log("rejected action", action?.payload);
+            })
+
+
+            .addCase(fetchSingleEvent.pending, (state) => {
+                state.loading = true;
+                state.error = null;
+                state.message = '';
+            })
+            .addCase(fetchSingleEvent.fulfilled, (state, action) => {
+                state.loading = false;
+                console.log("action.payload", action.payload);
+
+                state.eventData = action.payload;
+            })
+            .addCase(fetchSingleEvent.rejected, (state, action) => {
+                state.loading = false;
+                console.log("rejected action", action?.payload);
             })
     },
 });
